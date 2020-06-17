@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import Exchange from "./Exchange";
+import Chart from "./Chart";
 
 function App() {
   const [currency, changeCurrency] = useState({
@@ -61,6 +62,7 @@ function App() {
         changeValue={changeValue}
         currencyValue={currencyValue}
       />
+      <Chart />
     </div>
   );
 }
