@@ -3,10 +3,13 @@ import CurrencyOne from "./CurrencyOne";
 import CurrencyTwo from "./CurrencyTwo";
 
 export default function Exchange({ ...props }) {
+  const swapExchange = () => {
+    
+  };
   return (
     <div>
       <CurrencyOne {...props} />
-      <button>Swap</button>
+      <button onClick={swapExchange}>Swap</button>
       <CurrencyTwo {...props} />
       <h2>
         {props.currencyValue.currencyOne} {props.currency.currencyOne} ={" "}

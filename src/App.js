@@ -10,9 +10,9 @@ function App() {
   });
   const [currencyValue, changeValue] = useState({
     currencyOne: 1,
-    currencyTwo: ""
+    currencyTwo: "",
   });
-  console.log('currencyValue', currencyValue)
+  console.log("currencyValue", currencyValue);
 
   console.log("currency", currency);
 
@@ -34,13 +34,16 @@ function App() {
         const conversionValue = response.data.rates[currency.currencyTwo];
         // console.log('conversionValue', conversionValue)
         // console.log("test", convertCurrency(conversionValue));
-      
-        changeValue({...currencyValue, currencyTwo: convertCurrency(conversionValue) })
+
+        changeValue({
+          ...currencyValue,
+          currencyTwo: convertCurrency(conversionValue),
+        });
       });
   }, [currency, currencyValue.currencyOne]);
 
   const convertCurrency = conversionRate => {
-    console.log('currencyValue.currencyOne', currencyValue.currencyOne)
+    console.log("currencyValue.currencyOne", currencyValue.currencyOne);
     const converted = currencyValue.currencyOne * conversionRate;
     return converted;
   };
