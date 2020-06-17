@@ -12,7 +12,11 @@ export default function CurrencyTwo({
     <div>
       <div className="currency-two-container">
         {" "}
-        <select onChange={handleCurrencyChange} id="currency-two">
+        <select
+          value={currency.currencyTwo}
+          onChange={handleCurrencyChange}
+          id="currency-two"
+        >
           <option value="AED">&#xf0d7; AED</option>
           <option value="ARS">&#xf0d7; ARS</option>
           <option value="AUD">&#xf0d7; AUD</option>
@@ -61,9 +65,7 @@ export default function CurrencyTwo({
           <option value="TRY">&#xf0d7; TRY</option>
           <option value="TWD">&#xf0d7; TWD</option>
           <option value="UAH">&#xf0d7; UAH</option>
-          <option value="USD" selected>
-            &#xf0d7; USD
-          </option>
+          <option value="USD">&#xf0d7; USD</option>
           <option value="UYU">&#xf0d7; UYU</option>
           <option value="VND">&#xf0d7; VND</option>
           <option value="ZAR">&#xf0d7; ZAR</option>

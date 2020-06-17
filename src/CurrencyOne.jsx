@@ -5,7 +5,7 @@ export default function CurrencyOne({
   convertCurrency,
   currency,
   changeValue,
-  currencyValue
+  currencyValue,
 }) {
   const handleCurrencyChange = e => {
     changeCurrency({
@@ -15,25 +15,28 @@ export default function CurrencyOne({
   };
 
   const handleValueChange = e => {
-    console.log('e', e.target.value)
-    changeValue({...currencyValue, currencyOne: e.target.value})
-  }
+    console.log("e", e.target.value);
+    changeValue({ ...currencyValue, currencyOne: e.target.value });
+  };
 
+  console.log("currency.currencyOne", currency.currencyOne);
 
   return (
     <div>
       <div className="currency-one-container">
         {" "}
-        <select onChange={handleCurrencyChange} id="currency-one">
+        <select
+        value={currency.currencyOne}
+          onChange={handleCurrencyChange}
+          id="currency-one"
+        >
           <option value="AED">&#xf0d7; AED</option>
           <option value="ARS">&#xf0d7; ARS</option>
           <option value="AUD">&#xf0d7; AUD</option>
           <option value="BGN">&#xf0d7; BGN</option>
           <option value="BRL">&#xf0d7; BRL</option>
           <option value="BSD">&#xf0d7; BSD</option>
-          <option value="CAD" selected>
-            &#xf0d7; CAD
-          </option>
+          <option value="CAD">&#xf0d7; CAD</option>
           <option value="CHF">&#xf0d7; CHF</option>
           <option value="CLP">&#xf0d7; CLP</option>
           <option value="CNY">&#xf0d7; CNY</option>
@@ -80,7 +83,11 @@ export default function CurrencyOne({
           <option value="VND">&#xf0d7; VND</option>
           <option value="ZAR">&#xf0d7; ZAR</option>
         </select>
-        <input value={currencyValue.currencyOne} onChange={handleValueChange} type="number"></input>
+        <input
+          value={currencyValue.currencyOne}
+          onChange={handleValueChange}
+          type="number"
+        ></input>
       </div>
     </div>
   );
