@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-export default function CurrencyTwo({ changeCurrency, currency }) {
+export default function CurrencyTwo({
+  changeCurrency,
+  currency,
+  currencyValue,
+}) {
   const handleCurrencyChange = e => {
     changeCurrency({ ...currency, currencyTwo: e.target.value });
   };
@@ -64,7 +68,7 @@ export default function CurrencyTwo({ changeCurrency, currency }) {
           <option value="VND">&#xf0d7; VND</option>
           <option value="ZAR">&#xf0d7; ZAR</option>
         </select>
-        <input type="number"></input>
+        <input value={currencyValue.currencyTwo} type="number"></input>
       </div>
     </div>
   );

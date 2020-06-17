@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import axios from 'axios';
+import axios from "axios";
 import Exchange from "./Exchange";
 
 function App() {
@@ -8,28 +8,41 @@ function App() {
     currencyOne: "CAD",
     currencyTwo: "USD",
   });
+  const [currencyValue, changeValue] = useState({
+    currencyOne: 0,
+    currencyTwo: 0
+  });
 
-  console.log('currency', currency)
+  console.log("currency", currency);
 
-useEffect(() => {
-  // axios.get("https://v6.exchangerate-api.com/v6/c298a3bc90706fb35412edbd/latest/USD")
-  // .then(response => {
-  //   console.log('data', response.data.conversion_rates)
-  // })
-  console.log('currencyOne', currency.currencyOne)
-  axios.get(`https://v6.exchangerate-api.com/v6/c298a3bc90706fb35412edbd/latest/${currency.currencyOne}`)
-  .then(response => {
-    console.log('data', response.data.conversion_rates)
-  })
-}, [currency])
+  useEffect(() => {
+    // axios.get("https://v6.exchangerate-api.com/v6/c298a3bc90706fb35412edbd/latest/USD")
+    // .then(response => {
+    //   console.log('data', response.data.conversion_rates)
+    // })
+    console.log("currencyOne", currency.currencyOne);
+    // axios.get(`https://v6.exchangerate-api.com/v6/c298a3bc90706fb35412edbd/latest/${currency.currencyOne}`)
+    axios
+      .get(
+        `https://api.exchangeratesapi.io/latest?base=${currency.currencyOne}
+  `
+      )
 
-const convertCurrency = baseCurrency => {
-  axios.get(`https://v6.exchangerate-api.com/v6/c298a3bc90706fb35412edbd/latest/${baseCurrency}`)
-  .then(response => {
-    console.log('data', response.data.conversion_rates)
-  })
-}
+      .then(response => {
+        console.log("data", response.data.rates);
+        const conversionValue = response.data.rates[currency.currencyTwo];
+        // console.log('conversionValue', conversionValue)
+        // console.log("test", convertCurrency(conversionValue));
+      
+        changeValue({currencyTwo: convertCurrency(conversionValue) })
+      });
+  }, [currency]);
 
+  const convertCurrency = conversionRate => {
+    console.log('currencyValue.currencyOne', currencyValue.currencyOne)
+    const converted = currencyValue.currencyOne * conversionRate;
+    return converted;
+  };
 
   // console.log('currency', currency.currencyOne)
 
@@ -37,7 +50,13 @@ const convertCurrency = baseCurrency => {
   return (
     <div className="App">
       <h1>FOREX Converter</h1>
-      <Exchange currency={currency} convertCurrency={convertCurrency} changeCurrency={changeCurrency} />
+      <Exchange
+        currency={currency}
+        convertCurrency={convertCurrency}
+        changeCurrency={changeCurrency}
+        changeValue={changeValue}
+        currencyValue={currencyValue}
+      />
     </div>
   );
 }

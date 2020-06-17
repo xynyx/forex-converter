@@ -4,6 +4,8 @@ export default function CurrencyOne({
   changeCurrency,
   convertCurrency,
   currency,
+  changeValue,
+  currencyValue
 }) {
   const handleCurrencyChange = e => {
     changeCurrency({
@@ -11,6 +13,13 @@ export default function CurrencyOne({
       currencyOne: e.target.value,
     });
   };
+
+  const handleValueChange = e => {
+    console.log('e', e.target.value)
+    changeValue({currencyOne: e.target.value})
+  }
+
+
   return (
     <div>
       <div className="currency-one-container">
@@ -71,7 +80,7 @@ export default function CurrencyOne({
           <option value="VND">&#xf0d7; VND</option>
           <option value="ZAR">&#xf0d7; ZAR</option>
         </select>
-        <input type="number"></input>
+        <input onChange={handleValueChange} type="number"></input>
       </div>
     </div>
   );

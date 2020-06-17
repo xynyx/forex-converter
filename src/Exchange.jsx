@@ -2,12 +2,12 @@ import React from "react";
 import CurrencyOne from "./CurrencyOne";
 import CurrencyTwo from "./CurrencyTwo";
 
-export default function Exchange({ changeCurrency, currency }) {
+export default function Exchange({ ...props }) {
   return (
     <div>
-      <CurrencyOne currency={currency} changeCurrency={changeCurrency} />
+      <CurrencyOne {...props} />
       <button>Swap</button>
-      <CurrencyTwo currency={currency} changeCurrency={changeCurrency} />
+      <CurrencyTwo {...props} />
       <h2>TEST</h2>
     </div>
   );
