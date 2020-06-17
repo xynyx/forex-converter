@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 
-export default function CurrencyOne({ changeCurrency }) {
+export default function CurrencyOne({
+  changeCurrency,
+  convertCurrency,
+  currency,
+}) {
   const handleCurrencyChange = e => {
-    changeCurrency({ currencyOne: e.target.value });
+    changeCurrency({
+      ...currency,
+      currencyOne: e.target.value,
+    });
   };
   return (
     <div>

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-export default function CurrencyTwo({ changeCurrency }) {
+export default function CurrencyTwo({ changeCurrency, currency }) {
   const handleCurrencyChange = e => {
-    changeCurrency({ currencyTwo: e.target.value });
+    changeCurrency({ ...currency, currencyTwo: e.target.value });
   };
   return (
     <div>
-      <div class="currency-two-container">
+      <div className="currency-two-container">
         {" "}
         <select onChange={handleCurrencyChange} id="currency-two">
           <option value="AED">&#xf0d7; AED</option>
