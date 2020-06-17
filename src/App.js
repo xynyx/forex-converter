@@ -3,8 +3,7 @@ import "./App.css";
 import axios from "axios";
 import Exchange from "./Exchange";
 import Chart from "./Chart";
-import Paper from '@material-ui/core/Paper';
-
+import Paper from "@material-ui/core/Paper";
 
 function App() {
   const [currency, changeCurrency] = useState({
@@ -17,9 +16,6 @@ function App() {
   });
 
   const [mapData, changeMapData] = useState();
-  console.log("currencyValue", currencyValue);
-
-  console.log("currency", currency);
 
   const getWeeklyExchange = () => {
     axios
@@ -27,12 +23,6 @@ function App() {
         `https://api.exchangeratesapi.io/history?start_at=2020-01-01&end_at=2020-06-17&base=${currency.currencyOne}`
       )
       .then(response => {
-        // const weekAgo = Date.now - 7
-        // const today = new Date(Date.now);
-        // console.log('weekAgo', weekAgo)
-        // console.log('response', response.data)
-        // console.log(Object.entries(response.data.rates))
-
         const dates = Object.entries(response.data.rates);
         const newDates = dates.sort((date1, date2) => {
           if (date1[0].split("-")[1] === date2[0].split("-")[1]) {
@@ -42,30 +32,17 @@ function App() {
           }
         });
 
-        const newD = newDates.map(date => {
+        const newDatesMapped = newDates.map(date => {
           const converted = convertCurrency(date[1][currency.currencyTwo]);
           return { date: date[0], Exchange: converted };
         });
 
-        console.log("newDates", newDates);
-        console.log("new", newD);
-        changeMapData(newD);
-
-        // const weeklyData = response.data.rates.map(rate => {
-        //   console.log(rate)
-        // })
-        // return weeklyData
+        changeMapData(newDatesMapped);
       });
   };
 
   useEffect(() => {
     getWeeklyExchange();
-    // axios.get("https://v6.exchangerate-api.com/v6/c298a3bc90706fb35412edbd/latest/USD")
-    // .then(response => {
-    //   console.log('data', response.data.conversion_rates)
-    // })
-
-    // axios.get(`https://v6.exchangerate-api.com/v6/c298a3bc90706fb35412edbd/latest/${currency.currencyOne}`)
     axios
       .get(
         `https://api.exchangeratesapi.io/latest?base=${currency.currencyOne}
@@ -74,9 +51,6 @@ function App() {
 
       .then(response => {
         const conversionValue = response.data.rates[currency.currencyTwo];
-        // console.log('conversionValue', conversionValue)
-        // console.log("test", convertCurrency(conversionValue));
-
         changeValue({
           ...currencyValue,
           currencyTwo: convertCurrency(conversionValue),
@@ -89,12 +63,9 @@ function App() {
     return converted.toFixed(4);
   };
 
-  // console.log('currency', currency.currencyOne)
-
-  // console.log('currency', currency.currencyTwo)
   return (
     <div className="App">
-      <Paper elevation={24}className="container">
+      <Paper elevation={24} className="container">
         <h1>FOREX Converter</h1>
         <Exchange
           currency={currency}
