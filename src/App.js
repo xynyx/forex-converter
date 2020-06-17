@@ -14,40 +14,47 @@ function App() {
     currencyTwo: "",
   });
 
-  const [mapData, changeMapData] = useState()
+  const [mapData, changeMapData] = useState();
   console.log("currencyValue", currencyValue);
 
   console.log("currency", currency);
 
   const getWeeklyExchange = () => {
-    axios.get(`https://api.exchangeratesapi.io/history?start_at=2020-06-10&end_at=2020-06-17&base=${currency.currencyOne}`)
-    .then(response => {
-      // const weekAgo = Date.now - 7
-      // const today = new Date(Date.now);
-      // console.log('weekAgo', weekAgo)
-      // console.log('response', response.data)
-      // console.log(Object.entries(response.data.rates))
+    axios
+      .get(
+        `https://api.exchangeratesapi.io/history?start_at=2020-04-10&end_at=2020-06-17&base=${currency.currencyOne}`
+      )
+      .then(response => {
+        // const weekAgo = Date.now - 7
+        // const today = new Date(Date.now);
+        // console.log('weekAgo', weekAgo)
+        // console.log('response', response.data)
+        // console.log(Object.entries(response.data.rates))
 
-      const dates = (Object.entries(response.data.rates));
-      const newDates = dates.sort((date1, date2) => {
-        return date1[0].split("-")[2] - date2[0].split("-")[2]
-      })
+        const dates = Object.entries(response.data.rates);
+        const newDates = dates.sort((date1, date2) => {
+          if (date1[0].split("-")[1] === date2[0].split("-")[1]) {
+            return date1[0].split("-")[2] - date2[0].split("-")[2];
+          } else {
+            return date1[0].split("-")[1] - date2[0].split("-")[1];
+          }
+        });
 
-      const newD = newDates.map(date => {
-        const converted = convertCurrency(date[1][currency.currencyTwo])
-        return [date[0], converted]
-      })
+        const newD = newDates.map(date => {
+          const converted = convertCurrency(date[1][currency.currencyTwo]);
+          return { date: date[0], value: converted };
+        });
 
-      console.log('newDates', newDates)
-      console.log('new', newD)
-      changeMapData(newD);
+        console.log("newDates", newDates);
+        console.log("new", newD);
+        changeMapData(newD);
 
-      // const weeklyData = response.data.rates.map(rate => {
-      //   console.log(rate)
-      // })
-      // return weeklyData
-    })
-  }
+        // const weeklyData = response.data.rates.map(rate => {
+        //   console.log(rate)
+        // })
+        // return weeklyData
+      });
+  };
 
   useEffect(() => {
     getWeeklyExchange();
@@ -64,7 +71,6 @@ function App() {
       )
 
       .then(response => {
-
         const conversionValue = response.data.rates[currency.currencyTwo];
         // console.log('conversionValue', conversionValue)
         // console.log("test", convertCurrency(conversionValue));
@@ -77,7 +83,6 @@ function App() {
   }, [currency, currencyValue.currencyOne]);
 
   const convertCurrency = conversionRate => {
-
     const converted = currencyValue.currencyOne * conversionRate;
     return converted;
   };
