@@ -16,7 +16,7 @@ export default function CurrencyOne({
 
   const handleValueChange = e => {
     console.log('e', e.target.value)
-    changeValue({currencyOne: e.target.value})
+    changeValue({...currencyValue, currencyOne: e.target.value})
   }
 
 

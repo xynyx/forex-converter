@@ -12,6 +12,7 @@ function App() {
     currencyOne: 0,
     currencyTwo: 0
   });
+  console.log('currencyValue', currencyValue)
 
   console.log("currency", currency);
 
@@ -34,7 +35,7 @@ function App() {
         // console.log('conversionValue', conversionValue)
         // console.log("test", convertCurrency(conversionValue));
       
-        changeValue({currencyTwo: convertCurrency(conversionValue) })
+        changeValue({...currencyValue, currencyTwo: convertCurrency(conversionValue) })
       });
   }, [currency]);
 
