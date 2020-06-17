@@ -6,6 +6,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import LanguageIcon from '@material-ui/icons/Language';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +26,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function CurrencyOne({
   changeCurrency,
-  convertCurrency,
   currency,
   changeValue,
   currencyValue,
@@ -62,7 +62,8 @@ export default function CurrencyOne({
           <MenuItem value="BGN">&#xf0d7; BGN</MenuItem>
           <MenuItem value="BRL">&#xf0d7; BRL</MenuItem>
           <MenuItem value="BSD">&#xf0d7; BSD</MenuItem>
-          <MenuItem value="CAD">&#xf0d7; CAD</MenuItem>
+          <MenuItem value="CAD">
+           <LanguageIcon /> CAD</MenuItem>
           <MenuItem value="CHF">&#xf0d7; CHF</MenuItem>
           <MenuItem value="CLP">&#xf0d7; CLP</MenuItem>
           <MenuItem value="CNY">&#xf0d7; CNY</MenuItem>

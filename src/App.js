@@ -3,6 +3,8 @@ import "./App.css";
 import axios from "axios";
 import Exchange from "./Exchange";
 import Chart from "./Chart";
+import Paper from '@material-ui/core/Paper';
+
 
 function App() {
   const [currency, changeCurrency] = useState({
@@ -92,7 +94,7 @@ function App() {
   // console.log('currency', currency.currencyTwo)
   return (
     <div className="App">
-      <div className="container">
+      <Paper elevation={24}className="container">
         <h1>FOREX Converter</h1>
         <Exchange
           currency={currency}
@@ -102,7 +104,7 @@ function App() {
           currencyValue={currencyValue}
         />
         <Chart mapData={mapData} />
-      </div>
+      </Paper>
     </div>
   );
 }
