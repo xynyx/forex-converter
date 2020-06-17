@@ -43,4 +43,21 @@
   justify-content: center;
   align-items: center;
   margin: 5% 25%;
+  padding-bottom: 1em;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    margin: 5% 10%;
+  }
+}
+
+.currency-container {
+  margin: 1em
+}
+
+.currency-dropdown {
+  margin: 0 1em;
+  transform: translateY(7px)
+  
 }

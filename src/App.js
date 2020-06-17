@@ -24,7 +24,7 @@ function App() {
   const getWeeklyExchange = () => {
     axios
       .get(
-        `https://api.exchangeratesapi.io/history?start_at=2020-04-10&end_at=2020-06-17&base=${currency.currencyOne}`
+        `https://api.exchangeratesapi.io/history?start_at=2020-01-01&end_at=2020-06-17&base=${currency.currencyOne}`
       )
       .then(response => {
         // const weekAgo = Date.now - 7
@@ -44,7 +44,7 @@ function App() {
 
         const newD = newDates.map(date => {
           const converted = convertCurrency(date[1][currency.currencyTwo]);
-          return { date: date[0], value: converted };
+          return { date: date[0], Exchange: converted };
         });
 
         console.log("newDates", newDates);
@@ -86,7 +86,7 @@ function App() {
 
   const convertCurrency = conversionRate => {
     const converted = currencyValue.currencyOne * conversionRate;
-    return converted;
+    return converted.toFixed(4);
   };
 
   // console.log('currency', currency.currencyOne)

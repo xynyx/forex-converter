@@ -13,7 +13,7 @@ export default function Chart({ mapData }) {
   console.log("mapData", mapData);
   const renderLineChart = (
     <LineChart
-      width={500}
+      width={600}
       height={300}
       data={mapData}
       margin={{
@@ -30,9 +30,9 @@ export default function Chart({ mapData }) {
       <Legend />
       <Line
         type="monotone"
-        dataKey="value"
+        dataKey="Exchange"
         stroke="#8884d8"
-        activeDot={{ r: 8 }}
+        // activeDot={{ r: 8 }}
       />
       {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
     </LineChart>
