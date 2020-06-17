@@ -53,7 +53,8 @@ const data = [
     amt: 2100,
   },
 ];
-export default function Chart() {
+export default function Chart({mapData}) {
+  console.log('mapData', mapData)
   const renderLineChart = (
     <LineChart
       width={500}
