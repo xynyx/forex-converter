@@ -17,6 +17,11 @@ function App() {
 
   const [mapData, changeMapData] = useState();
 
+  const convertCurrency = conversionRate => {
+    const converted = currencyValue.currencyOne * conversionRate;
+    return converted.toFixed(4);
+  };
+  
   const getWeeklyExchange = () => {
     axios
       .get(
@@ -57,11 +62,6 @@ function App() {
         });
       });
   }, [currency, currencyValue.currencyOne]);
-
-  const convertCurrency = conversionRate => {
-    const converted = currencyValue.currencyOne * conversionRate;
-    return converted.toFixed(4);
-  };
 
   return (
     <div className="App">
