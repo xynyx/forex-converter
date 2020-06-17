@@ -21,47 +21,39 @@ function App() {
     const converted = currencyValue.currencyOne * conversionRate;
     return converted.toFixed(4);
   };
-  
-  const getWeeklyExchange = () => {
-    axios
-      .get(
-        `https://api.exchangeratesapi.io/history?start_at=2020-01-01&end_at=2020-06-17&base=${currency.currencyOne}`
-      )
-      .then(response => {
-        const dates = Object.entries(response.data.rates);
-        const newDates = dates.sort((date1, date2) => {
-          if (date1[0].split("-")[1] === date2[0].split("-")[1]) {
-            return date1[0].split("-")[2] - date2[0].split("-")[2];
-          } else {
-            return date1[0].split("-")[1] - date2[0].split("-")[1];
-          }
-        });
-
-        const newDatesMapped = newDates.map(date => {
-          const converted = convertCurrency(date[1][currency.currencyTwo]);
-          return { date: date[0], Exchange: converted };
-        });
-
-        changeMapData(newDatesMapped);
-      });
-  };
 
   useEffect(() => {
-    getWeeklyExchange();
-    axios
-      .get(
+    Promise.all([
+      axios.get(
         `https://api.exchangeratesapi.io/latest?base=${currency.currencyOne}
   `
-      )
-
-      .then(response => {
-        const conversionValue = response.data.rates[currency.currencyTwo];
-        changeValue({
-          ...currencyValue,
-          currencyTwo: convertCurrency(conversionValue),
-        });
+      ),
+      axios.get(
+        `https://api.exchangeratesapi.io/history?start_at=2020-01-01&end_at=2020-06-17&base=${currency.currencyOne}`
+      ),
+    ]).then(response => {
+      const conversionValue = response[0].data.rates[currency.currencyTwo];
+      changeValue({
+        ...currencyValue,
+        currencyTwo: convertCurrency(conversionValue),
       });
-  }, [currency, currencyValue.currencyOne]);
+      const dates = Object.entries(response[1].data.rates);
+      const newDates = dates.sort((date1, date2) => {
+        if (date1[0].split("-")[1] === date2[0].split("-")[1]) {
+          return date1[0].split("-")[2] - date2[0].split("-")[2];
+        } else {
+          return date1[0].split("-")[1] - date2[0].split("-")[1];
+        }
+      });
+
+      const newDatesMapped = newDates.map(date => {
+        const converted = convertCurrency(date[1][currency.currencyTwo]);
+        return { date: date[0], Exchange: converted };
+      });
+
+      changeMapData(newDatesMapped);
+    });
+  }, [currencyValue.currencyOne, currency]);
 
   return (
     <div className="App">

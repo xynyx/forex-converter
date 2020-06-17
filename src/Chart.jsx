@@ -10,7 +10,6 @@ import {
 } from "recharts";
 
 export default function Chart({ mapData }) {
-  console.log("mapData", mapData);
   const renderLineChart = (
     <LineChart
       width={600}
