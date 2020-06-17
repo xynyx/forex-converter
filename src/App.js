@@ -9,8 +9,8 @@ function App() {
     currencyTwo: "USD",
   });
   const [currencyValue, changeValue] = useState({
-    currencyOne: 0,
-    currencyTwo: 0
+    currencyOne: 1,
+    currencyTwo: ""
   });
   console.log('currencyValue', currencyValue)
 
@@ -37,7 +37,7 @@ function App() {
       
         changeValue({...currencyValue, currencyTwo: convertCurrency(conversionValue) })
       });
-  }, [currency]);
+  }, [currency, currencyValue.currencyOne]);
 
   const convertCurrency = conversionRate => {
     console.log('currencyValue.currencyOne', currencyValue.currencyOne)

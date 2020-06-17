@@ -80,7 +80,7 @@ export default function CurrencyOne({
           <option value="VND">&#xf0d7; VND</option>
           <option value="ZAR">&#xf0d7; ZAR</option>
         </select>
-        <input onChange={handleValueChange} type="number"></input>
+        <input value={currencyValue.currencyOne} onChange={handleValueChange} type="number"></input>
       </div>
     </div>
   );

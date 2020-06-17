@@ -8,7 +8,10 @@ export default function Exchange({ ...props }) {
       <CurrencyOne {...props} />
       <button>Swap</button>
       <CurrencyTwo {...props} />
-      <h2>TEST</h2>
+      <h2>
+        {props.currencyValue.currencyOne} {props.currency.currencyOne} ={" "}
+        {props.currencyValue.currencyTwo} {props.currency.currencyTwo}
+      </h2>
     </div>
   );
 }
