@@ -1,10 +1,36 @@
 import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 export default function CurrencyTwo({
   changeCurrency,
   currency,
   currencyValue,
 }) {
+  const classes = useStyles();
+
   const handleCurrencyChange = e => {
     changeCurrency({ ...currency, currencyTwo: e.target.value });
   };
@@ -12,65 +38,76 @@ export default function CurrencyTwo({
     <div>
       <div className="currency-two-container">
         {" "}
-        <select
+        <FormControl className={classes.formControl}></FormControl>
+        <Select
           value={currency.currencyTwo}
           onChange={handleCurrencyChange}
-          id="currency-two"
+          id="currency-one"
         >
-          <option value="AED">&#xf0d7; AED</option>
-          <option value="ARS">&#xf0d7; ARS</option>
-          <option value="AUD">&#xf0d7; AUD</option>
-          <option value="BGN">&#xf0d7; BGN</option>
-          <option value="BRL">&#xf0d7; BRL</option>
-          <option value="BSD">&#xf0d7; BSD</option>
-          <option value="CAD">&#xf0d7; CAD</option>
-          <option value="CHF">&#xf0d7; CHF</option>
-          <option value="CLP">&#xf0d7; CLP</option>
-          <option value="CNY">&#xf0d7; CNY</option>
-          <option value="COP">&#xf0d7; COP</option>
-          <option value="CZK">&#xf0d7; CZK</option>
-          <option value="DKK">&#xf0d7; DKK</option>
-          <option value="DOP">&#xf0d7; DOP</option>
-          <option value="EGP">&#xf0d7; EGP</option>
-          <option value="EUR">&#xf0d7; EUR</option>
-          <option value="FJD">&#xf0d7; FJD</option>
-          <option value="GBP">&#xf0d7; GBP</option>
-          <option value="GTQ">&#xf0d7; GTQ</option>
-          <option value="HKD">&#xf0d7; HKD</option>
-          <option value="HRK">&#xf0d7; HRK</option>
-          <option value="HUF">&#xf0d7; HUF</option>
-          <option value="IDR">&#xf0d7; IDR</option>
-          <option value="ILS">&#xf0d7; ILS</option>
-          <option value="INR">&#xf0d7; INR</option>
-          <option value="ISK">&#xf0d7; ISK</option>
-          <option value="JPY">&#xf0d7; JPY</option>
-          <option value="KRW">&#xf0d7; KRW</option>
-          <option value="KZT">&#xf0d7; KZT</option>
-          <option value="MXN">&#xf0d7; MXN</option>
-          <option value="MYR">&#xf0d7; MYR</option>
-          <option value="NOK">&#xf0d7; NOK</option>
-          <option value="NZD">&#xf0d7; NZD</option>
-          <option value="PAB">&#xf0d7; PAB</option>
-          <option value="PEN">&#xf0d7; PEN</option>
-          <option value="PHP">&#xf0d7; PHP</option>
-          <option value="PKR">&#xf0d7; PKR</option>
-          <option value="PLN">&#xf0d7; PLN</option>
-          <option value="PYG">&#xf0d7; PYG</option>
-          <option value="RON">&#xf0d7; RON</option>
-          <option value="RUB">&#xf0d7; RUB</option>
-          <option value="SAR">&#xf0d7; SAR</option>
-          <option value="SEK">&#xf0d7; SEK</option>
-          <option value="SGD">&#xf0d7; SGD</option>
-          <option value="THB">&#xf0d7; THB</option>
-          <option value="TRY">&#xf0d7; TRY</option>
-          <option value="TWD">&#xf0d7; TWD</option>
-          <option value="UAH">&#xf0d7; UAH</option>
-          <option value="USD">&#xf0d7; USD</option>
-          <option value="UYU">&#xf0d7; UYU</option>
-          <option value="VND">&#xf0d7; VND</option>
-          <option value="ZAR">&#xf0d7; ZAR</option>
-        </select>
-        <input value={currencyValue.currencyTwo} type="number"></input>
+          <MenuItem value="AED">&#xf0d7; AED</MenuItem>
+          <MenuItem value="ARS">&#xf0d7; ARS</MenuItem>
+          <MenuItem value="AUD">&#xf0d7; AUD</MenuItem>
+          <MenuItem value="BGN">&#xf0d7; BGN</MenuItem>
+          <MenuItem value="BRL">&#xf0d7; BRL</MenuItem>
+          <MenuItem value="BSD">&#xf0d7; BSD</MenuItem>
+          <MenuItem value="CAD">&#xf0d7; CAD</MenuItem>
+          <MenuItem value="CHF">&#xf0d7; CHF</MenuItem>
+          <MenuItem value="CLP">&#xf0d7; CLP</MenuItem>
+          <MenuItem value="CNY">&#xf0d7; CNY</MenuItem>
+          <MenuItem value="COP">&#xf0d7; COP</MenuItem>
+          <MenuItem value="CZK">&#xf0d7; CZK</MenuItem>
+          <MenuItem value="DKK">&#xf0d7; DKK</MenuItem>
+          <MenuItem value="DOP">&#xf0d7; DOP</MenuItem>
+          <MenuItem value="EGP">&#xf0d7; EGP</MenuItem>
+          <MenuItem value="EUR">&#xf0d7; EUR</MenuItem>
+          <MenuItem value="FJD">&#xf0d7; FJD</MenuItem>
+          <MenuItem value="GBP">&#xf0d7; GBP</MenuItem>
+          <MenuItem value="GTQ">&#xf0d7; GTQ</MenuItem>
+          <MenuItem value="HKD">&#xf0d7; HKD</MenuItem>
+          <MenuItem value="HRK">&#xf0d7; HRK</MenuItem>
+          <MenuItem value="HUF">&#xf0d7; HUF</MenuItem>
+          <MenuItem value="IDR">&#xf0d7; IDR</MenuItem>
+          <MenuItem value="ILS">&#xf0d7; ILS</MenuItem>
+          <MenuItem value="INR">&#xf0d7; INR</MenuItem>
+          <MenuItem value="ISK">&#xf0d7; ISK</MenuItem>
+          <MenuItem value="JPY">&#xf0d7; JPY</MenuItem>
+          <MenuItem value="KRW">&#xf0d7; KRW</MenuItem>
+          <MenuItem value="KZT">&#xf0d7; KZT</MenuItem>
+          <MenuItem value="MXN">&#xf0d7; MXN</MenuItem>
+          <MenuItem value="MYR">&#xf0d7; MYR</MenuItem>
+          <MenuItem value="NOK">&#xf0d7; NOK</MenuItem>
+          <MenuItem value="NZD">&#xf0d7; NZD</MenuItem>
+          <MenuItem value="PAB">&#xf0d7; PAB</MenuItem>
+          <MenuItem value="PEN">&#xf0d7; PEN</MenuItem>
+          <MenuItem value="PHP">&#xf0d7; PHP</MenuItem>
+          <MenuItem value="PKR">&#xf0d7; PKR</MenuItem>
+          <MenuItem value="PLN">&#xf0d7; PLN</MenuItem>
+          <MenuItem value="PYG">&#xf0d7; PYG</MenuItem>
+          <MenuItem value="RON">&#xf0d7; RON</MenuItem>
+          <MenuItem value="RUB">&#xf0d7; RUB</MenuItem>
+          <MenuItem value="SAR">&#xf0d7; SAR</MenuItem>
+          <MenuItem value="SEK">&#xf0d7; SEK</MenuItem>
+          <MenuItem value="SGD">&#xf0d7; SGD</MenuItem>
+          <MenuItem value="THB">&#xf0d7; THB</MenuItem>
+          <MenuItem value="TRY">&#xf0d7; TRY</MenuItem>
+          <MenuItem value="TWD">&#xf0d7; TWD</MenuItem>
+          <MenuItem value="UAH">&#xf0d7; UAH</MenuItem>
+          <MenuItem value="USD">&#xf0d7; USD</MenuItem>
+          <MenuItem value="UYU">&#xf0d7; UYU</MenuItem>
+          <MenuItem value="VND">&#xf0d7; VND</MenuItem>
+          <MenuItem value="ZAR">&#xf0d7; ZAR</MenuItem>
+        </Select>
+        <FormControl />
+        <TextField
+          id="outlined-number"
+          label="Number"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+          value={currencyValue.currencyTwo}
+        />
       </div>
     </div>
   );

@@ -92,15 +92,17 @@ function App() {
   // console.log('currency', currency.currencyTwo)
   return (
     <div className="App">
-      <h1>FOREX Converter</h1>
-      <Exchange
-        currency={currency}
-        convertCurrency={convertCurrency}
-        changeCurrency={changeCurrency}
-        changeValue={changeValue}
-        currencyValue={currencyValue}
-      />
-      <Chart mapData={mapData} />
+      <div className="container">
+        <h1>FOREX Converter</h1>
+        <Exchange
+          currency={currency}
+          convertCurrency={convertCurrency}
+          changeCurrency={changeCurrency}
+          changeValue={changeValue}
+          currencyValue={currencyValue}
+        />
+        <Chart mapData={mapData} />
+      </div>
     </div>
   );
 }
