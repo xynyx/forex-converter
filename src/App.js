@@ -18,11 +18,6 @@ function App() {
 
   const [mapData, changeMapData] = useState();
 
-  const convertCurrency = conversionRate => {
-    const converted = currencyOne.value * conversionRate;
-    return converted.toFixed(4);
-  };
-
   useEffect(() => {
     Promise.all([
       axios.get(
@@ -35,9 +30,16 @@ function App() {
     ]).then(response => {
       const conversionValue = response[0].data.rates[currencyTwo.currency];
 
+      const convertCurrency = conversionRate => {
+        const converted = currencyOne.value * conversionRate;
+        return converted.toFixed(4);
+      };
+
+      const converted = convertCurrency(conversionValue);
+
       changeCurrencyTwo(prev => ({
         ...prev,
-        value: convertCurrency(conversionValue),
+        value: converted,
       }));
 
       const dates = Object.entries(response[1].data.rates);
@@ -65,7 +67,6 @@ function App() {
         <Exchange
           currencyOne={currencyOne}
           currencyTwo={currencyTwo}
-          convertCurrency={convertCurrency}
           changeCurrencyOne={changeCurrencyOne}
           changeCurrencyTwo={changeCurrencyTwo}
         />
