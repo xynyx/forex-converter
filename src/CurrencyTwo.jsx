@@ -25,14 +25,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function CurrencyTwo({
-  changeCurrency,
-  currency,
+  changeCurrencyTwo,
+  currencyTwo,
   currencyValue,
 }) {
   const classes = useStyles();
-
   const handleCurrencyChange = e => {
-    changeCurrency({ ...currency, currencyTwo: e.target.value });
+    changeCurrencyTwo(prev => ({ ...prev, currency: e.target.value }));
   };
   return (
     <div>
@@ -40,7 +39,7 @@ export default function CurrencyTwo({
         {" "}
         <FormControl className={classes.formControl}></FormControl>
         <Select
-          value={currency.currencyTwo}
+          value={currencyTwo.currency}
           onChange={handleCurrencyChange}
           className="currency-dropdown"
         >
@@ -106,7 +105,7 @@ export default function CurrencyTwo({
             shrink: true,
           }}
           variant="outlined"
-          value={currencyValue.currencyTwo}
+          value={currencyTwo.value}
         />
       </div>
     </div>

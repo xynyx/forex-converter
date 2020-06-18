@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import SwapVertIcon from "@material-ui/icons/SwapVert";
 
-
 const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1),
@@ -13,15 +12,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Exchange({ ...props }) {
-
-
   const classes = useStyles();
   const swapExchange = () => {
-    props.changeCurrency({
-      currencyOne: props.currency.currencyTwo,
-      currencyTwo: props.currency.currencyOne,
-    });
+    props.changeCurrencyOne(prev => ({
+      ...prev,
+      currency: props.currencyTwo.currency,
+    }));
+
+    props.changeCurrencyTwo(prev => ({
+      ...prev,
+      currency: props.currencyOne.currency,
+    }));
   };
+
+  console.log("currencyOne :>> ", props.currencyOne);
+  console.log("currencyTwo :>> ", props.currencyTwo);
   return (
     <div>
       <CurrencyOne {...props} />
@@ -36,8 +41,8 @@ export default function Exchange({ ...props }) {
       </Button>
       <CurrencyTwo {...props} />
       <h2>
-        {props.currencyValue.currencyOne} {props.currency.currencyOne} ={" "}
-        {props.currencyValue.currencyTwo} {props.currency.currencyTwo}
+        {props.currencyOne.currency} {props.currencyOne.value} ={" "}
+        {props.currencyTwo.currency} {props.currencyTwo.value}
       </h2>
     </div>
   );

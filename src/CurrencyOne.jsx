@@ -7,6 +7,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import LanguageIcon from "@material-ui/icons/Language";
+import debounce from "debounce";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,25 +27,28 @@ const useStyles = makeStyles(theme => ({
 
 export default function CurrencyOne({
   changeCurrency,
-  currency,
+  changeCurrencyOne,
+  currencyOne,
   changeValue,
   currencyValue,
 }) {
   const classes = useStyles();
 
+  // const [timeout, setTimeout] = useState(0);
+  let timeout = 0;
+
   const handleCurrencyChange = e => {
-    changeCurrency({
-      ...currency,
-      currencyOne: e.target.value,
-    });
+    changeCurrencyOne(prev => ({ ...prev, currency: e.target.value }));
   };
 
   const handleValueChange = e => {
-    console.log("e", e.target.value);
-    changeValue({ ...currencyValue, currencyOne: e.target.value });
-  };
+    e.persist()
+    // if (timeout) clearTimeout(timeout);
+    console.log('e.target.value :>> ', e.target.value);
 
-  console.log("currency.currencyOne", currency.currencyOne);
+    // timeout = setTimeout(() => {
+    changeCurrencyOne(prev => ({ ...prev, value: e.target.value }));
+  };
 
   return (
     <div>
@@ -52,7 +56,7 @@ export default function CurrencyOne({
         {" "}
         <FormControl className={classes.formControl}></FormControl>
         <Select
-          value={currency.currencyOne}
+          value={currencyOne.currency}
           onChange={handleCurrencyChange}
           className="currency-dropdown"
         >
@@ -118,8 +122,8 @@ export default function CurrencyOne({
             shrink: true,
           }}
           variant="outlined"
-          value={currencyValue.currencyOne}
-          onChange={handleValueChange}
+          value={currencyOne.value}
+          onChange={e => handleValueChange(e)}
         />
       </div>
     </div>

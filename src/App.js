@@ -6,37 +6,46 @@ import Chart from "./Chart";
 import Paper from "@material-ui/core/Paper";
 
 function App() {
-  const [currency, changeCurrency] = useState({
-    currencyOne: "CAD",
-    currencyTwo: "USD",
+  const [currencyTwo, changeCurrencyTwo] = useState({
+    currency: "USD",
+    value: 0,
   });
-  const [currencyValue, changeValue] = useState({
-    currencyOne: 1,
-    currencyTwo: "",
+
+  const [currencyOne, changeCurrencyOne] = useState({
+    currency: "CAD",
+    value: 1,
   });
+
 
   const [mapData, changeMapData] = useState();
 
   const convertCurrency = conversionRate => {
-    const converted = currencyValue.currencyOne * conversionRate;
+    const converted = currencyOne.value * conversionRate;
     return converted.toFixed(4);
   };
 
   useEffect(() => {
-    Promise.all([
+    const abortController = new AbortController();
+    const fetchData = () => Promise.all([
       axios.get(
-        `https://api.exchangeratesapi.io/latest?base=${currency.currencyOne}
-  `
+        `https://api.exchangeratesapi.io/latest?base=${currencyOne.currency}
+  `, {signal: abortController.signal}
       ),
       axios.get(
-        `https://api.exchangeratesapi.io/history?start_at=2020-01-01&end_at=2020-06-17&base=${currency.currencyOne}`
+        `https://api.exchangeratesapi.io/history?start_at=2020-01-01&end_at=2020-06-17&base=${currencyOne.currency}`, {signal: abortController.signal}
       ),
     ]).then(response => {
-      const conversionValue = response[0].data.rates[currency.currencyTwo];
-      changeValue({
-        ...currencyValue,
-        currencyTwo: convertCurrency(conversionValue),
-      });
+      console.log("response[0].data.rates :>> ", response[0].data.rates);
+      const conversionValue = response[0].data.rates[currencyTwo.currency];
+
+      console.log('conversionValue :>> ', conversionValue);
+
+      console.log('convertCurrency(conversionValue) :>> ', convertCurrency(conversionValue));
+      changeCurrencyTwo(prev => ({
+        ...prev,
+        value: convertCurrency(conversionValue),
+      }));
+      console.log("currencyTwo", currencyTwo);
       const dates = Object.entries(response[1].data.rates);
       const newDates = dates.sort((date1, date2) => {
         if (date1[0].split("-")[1] === date2[0].split("-")[1]) {
@@ -47,24 +56,35 @@ function App() {
       });
 
       const newDatesMapped = newDates.map(date => {
-        const converted = convertCurrency(date[1][currency.currencyTwo]);
+        const converted = convertCurrency(date[1][currencyTwo.currency]);
         return { date: date[0], Exchange: converted };
       });
 
       changeMapData(newDatesMapped);
-    });
-  }, [currencyValue.currencyOne, currency]);
+    }).catch((e) => {
+      if (!abortController.signal.aborted) {
+
+      }
+    })
+
+    fetchData();
+
+    return () => {
+      abortController.abort();
+    }
+
+  }, [currencyOne, currencyTwo.currency]);
 
   return (
     <div className="App">
       <Paper elevation={24} className="container">
         <h1>FOREX Converter</h1>
         <Exchange
-          currency={currency}
+          currencyOne={currencyOne}
+          currencyTwo={currencyTwo}
           convertCurrency={convertCurrency}
-          changeCurrency={changeCurrency}
-          changeValue={changeValue}
-          currencyValue={currencyValue}
+          changeCurrencyOne={changeCurrencyOne}
+          changeCurrencyTwo={changeCurrencyTwo}
         />
         <Chart mapData={mapData} />
       </Paper>

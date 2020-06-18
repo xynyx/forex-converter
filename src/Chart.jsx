@@ -31,9 +31,7 @@ export default function Chart({ mapData }) {
         type="monotone"
         dataKey="Exchange"
         stroke="#8884d8"
-        // activeDot={{ r: 8 }}
       />
-      {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
     </LineChart>
   );
 
