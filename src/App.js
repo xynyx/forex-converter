@@ -16,7 +16,6 @@ function App() {
     value: 1,
   });
 
-
   const [mapData, changeMapData] = useState();
 
   const convertCurrency = conversionRate => {
@@ -25,27 +24,22 @@ function App() {
   };
 
   useEffect(() => {
-    const abortController = new AbortController();
-    const fetchData = () => Promise.all([
+    Promise.all([
       axios.get(
         `https://api.exchangeratesapi.io/latest?base=${currencyOne.currency}
-  `, {signal: abortController.signal}
+  `
       ),
       axios.get(
-        `https://api.exchangeratesapi.io/history?start_at=2020-01-01&end_at=2020-06-17&base=${currencyOne.currency}`, {signal: abortController.signal}
+        `https://api.exchangeratesapi.io/history?start_at=2020-01-01&end_at=2020-06-17&base=${currencyOne.currency}`
       ),
     ]).then(response => {
-      console.log("response[0].data.rates :>> ", response[0].data.rates);
       const conversionValue = response[0].data.rates[currencyTwo.currency];
 
-      console.log('conversionValue :>> ', conversionValue);
-
-      console.log('convertCurrency(conversionValue) :>> ', convertCurrency(conversionValue));
       changeCurrencyTwo(prev => ({
         ...prev,
         value: convertCurrency(conversionValue),
       }));
-      console.log("currencyTwo", currencyTwo);
+
       const dates = Object.entries(response[1].data.rates);
       const newDates = dates.sort((date1, date2) => {
         if (date1[0].split("-")[1] === date2[0].split("-")[1]) {
@@ -61,18 +55,7 @@ function App() {
       });
 
       changeMapData(newDatesMapped);
-    }).catch((e) => {
-      if (!abortController.signal.aborted) {
-
-      }
-    })
-
-    fetchData();
-
-    return () => {
-      abortController.abort();
-    }
-
+    });
   }, [currencyOne, currencyTwo.currency]);
 
   return (

@@ -42,7 +42,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 5% 25%;
+  margin: 4.5% 25%;
   padding-bottom: 1em;
 }
 
@@ -53,11 +53,10 @@
 }
 
 .currency-container {
-  margin: 1em
+  margin: 1em;
 }
 
 .currency-dropdown {
   margin: 0 1em;
-  transform: translateY(7px)
-  
+  transform: translateY(7px);
 }

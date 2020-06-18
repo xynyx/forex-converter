@@ -25,8 +25,6 @@ export default function Exchange({ ...props }) {
     }));
   };
 
-  console.log("currencyOne :>> ", props.currencyOne);
-  console.log("currencyTwo :>> ", props.currencyTwo);
   return (
     <div>
       <CurrencyOne {...props} />
@@ -41,8 +39,8 @@ export default function Exchange({ ...props }) {
       </Button>
       <CurrencyTwo {...props} />
       <h2>
-        {props.currencyOne.currency} {props.currencyOne.value} ={" "}
-        {props.currencyTwo.currency} {props.currencyTwo.value}
+        {props.currencyOne.value} {props.currencyOne.currency} ={" "}
+        {props.currencyTwo.value} {props.currencyTwo.currency}
       </h2>
     </div>
   );

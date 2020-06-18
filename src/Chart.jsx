@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import {
   LineChart,
   Line,
@@ -31,6 +31,7 @@ export default function Chart({ mapData }) {
         type="monotone"
         dataKey="Exchange"
         stroke="#8884d8"
+        dot={false}
       />
     </LineChart>
   );
