@@ -20,13 +20,16 @@ function App() {
   const [mapData, changeMapData] = useState();
 
   useEffect(() => {
+    const now = new Date();
+    const threeMonthsAgo = date.format(date.addMonths(now, -3), "YYYY-MM-DD")
+
     Promise.all([
       axios.get(
         `https://api.exchangeratesapi.io/latest?base=${currencyOne.currency}
   `
       ),
       axios.get(
-        `https://api.exchangeratesapi.io/history?start_at=2020-01-01&end_at=2020-06-17&base=${currencyOne.currency}`
+        `https://api.exchangeratesapi.io/history?start_at=${threeMonthsAgo}&end_at=${date.format(now, "YYYY-MM-DD")}&base=${currencyOne.currency}`
       ),
     ]).then(response => {
       const conversionValue = response[0].data.rates[currencyTwo.currency];
@@ -52,11 +55,11 @@ function App() {
         }
       });
 
-      const pattern = date.compile("MMM D, YYYY")
+
+      const pattern = date.compile("MMM D, 'YY")
 
       const newDatesMapped = newDates.map(day => {
         const splitDate = day[0].split("-");
-        console.log('splitDate', splitDate)
         const formattedDate = date.format(new Date(splitDate[0], splitDate[1] - 1, splitDate[2]), pattern);
         const converted = convertCurrency(day[1][currencyTwo.currency]);
         return { date: formattedDate, Exchange: converted };
