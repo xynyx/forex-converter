@@ -4,6 +4,7 @@ import axios from "axios";
 import Exchange from "./Exchange";
 import Chart from "./Chart";
 import Paper from "@material-ui/core/Paper";
+import date from 'date-and-time';
 
 function App() {
   const [currencyTwo, changeCurrencyTwo] = useState({
@@ -51,9 +52,14 @@ function App() {
         }
       });
 
-      const newDatesMapped = newDates.map(date => {
-        const converted = convertCurrency(date[1][currencyTwo.currency]);
-        return { date: date[0], Exchange: converted };
+      const pattern = date.compile("MMM D, YYYY")
+
+      const newDatesMapped = newDates.map(day => {
+        const splitDate = day[0].split("-");
+        console.log('splitDate', splitDate)
+        const formattedDate = date.format(new Date(splitDate[0], splitDate[1] - 1, splitDate[2]), pattern);
+        const converted = convertCurrency(day[1][currencyTwo.currency]);
+        return { date: formattedDate, Exchange: converted };
       });
 
       changeMapData(newDatesMapped);

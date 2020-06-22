@@ -43,7 +43,7 @@ export default function CurrencyTwo({
           onChange={handleCurrencyChange}
           className="currency-dropdown"
         >
-                   <MenuItem value="AUD"> AUD</MenuItem>
+          <MenuItem value="AUD"> AUD</MenuItem>
           <MenuItem value="BGN"> BGN</MenuItem>
           <MenuItem value="BRL"> BRL</MenuItem>
           <MenuItem value="CAD">CAD</MenuItem>
@@ -80,7 +80,7 @@ export default function CurrencyTwo({
         <FormControl />
         <TextField
           id="outlined-number"
-          label="Number"
+          label="Converted Value"
           type="number"
           InputLabelProps={{
             shrink: true,

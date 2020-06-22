@@ -12,7 +12,7 @@ import {
 export default function Chart({ mapData }) {
   const renderLineChart = (
     <LineChart
-      width={600}
+      width={700}
       height={300}
       data={mapData}
       margin={{
@@ -23,11 +23,13 @@ export default function Chart({ mapData }) {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="date" />
-      <YAxis />
+      <XAxis dataKey="date"/>
+      <YAxis tick={{fontSize: "1.3em"}}/>
       <Tooltip />
       <Legend />
       <Line
+        animationDuration={500}
+        strokeWidth={2.3}
         type="monotone"
         dataKey="Exchange"
         stroke="#8884d8"

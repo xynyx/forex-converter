@@ -88,7 +88,7 @@ export default function CurrencyOne({
         <FormControl />
         <TextField
           id="outlined-number"
-          label="Number"
+          label="Value"
           type="number"
           InputLabelProps={{
             shrink: true,
