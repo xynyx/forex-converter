@@ -24,7 +24,7 @@ export default function Chart({ mapData }) {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
-        <YAxis tick={{ fontSize: "1.3em" }} />
+        <YAxis tick={{ fontSize: "1.2em" }} />
         <Tooltip />
         <Legend />
         <Line

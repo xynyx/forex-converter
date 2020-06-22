@@ -56,17 +56,19 @@ function App() {
       const dates = Object.entries(response[1].data.rates);
       // The API returns dates poorly formatted -> this will sort them by date
       const newDates = dates.sort((date1, date2) => {
-        if (date1[0].split("-")[1] === date2[0].split("-")[1]) {
-          return date1[0].split("-")[2] - date2[0].split("-")[2];
+        const dayOne = date1[0].split("-")
+        const dayTwo = date2[0].split("-")
+        if (dayOne[1] === dayTwo[1]) {
+          return dayOne[2] - dayTwo[2];
         } else {
-          return date1[0].split("-")[1] - date2[0].split("-")[1];
+          return dayOne[1] - dayTwo[1];
         }
       });
 
       // Pattern for graph label (easier to read)
       const pattern = date.compile("MMM D, 'YY");
 
-      // Convert dates into more accessible format, and return each date & conversion in a format the graph can use
+      // Convert dates into more readable format, and return each date & conversion in a format the graph can use
       const newDatesMapped = newDates.map(day => {
         const splitDate = day[0].split("-");
         const formattedDate = date.format(
