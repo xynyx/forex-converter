@@ -13,6 +13,10 @@ object-assign
 /*! decimal.js-light v2.5.0 https://github.com/MikeMcl/decimal.js-light/LICENCE */
 
 /**
+ * @preserve date-and-time.js (c) KNOWLEDGECODE | MIT
+ */
+
+/**
  * A better abstraction over CSS.
  *
  * @copyright Oleg Isonen (Slobodskoi) / Isonen 2014-present
