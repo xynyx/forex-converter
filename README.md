@@ -1,5 +1,4 @@
 <!-- PROJECT LOGO -->
-<br />
 <p align="center">
 
   <h1 align="center">Forex Converter</h1>
@@ -16,7 +15,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Forex Converter](https://github.com/xynyx/forex-converter/blob/master/docs/forex.png?raw=true)
 
 ### Built With
 
