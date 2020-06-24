@@ -15,7 +15,7 @@
 
 ## About The Project
 
-[![Forex Converter](https://github.com/xynyx/forex-converter/blob/master/docs/forex.png?raw=true)
+![Forex Converter](https://github.com/xynyx/forex-converter/blob/master/docs/forex.png?raw=true)
 
 ### Built With
 
